@@ -18,5 +18,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(routes);
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp'))); // Toda vez que for acessada a rota files, essa pasta será carregada na memória
 
 module.exports = app;
