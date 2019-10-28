@@ -5,6 +5,10 @@ const routes = require('./routes');
 const path = require('path');
 
 const app = express();
+
+const server = require('http').Server(app);
+const io = require('socket.io')(server); // Usada para trabalhar em real time
+
 mongoose.connect('mongodb+srv://pcfmello:ciclismo@cluster0-3fpe5.mongodb.net/node_omni_project_dropbox?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
@@ -20,4 +24,4 @@ app.use(routes);
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp'))); // Toda vez que for acessada a rota files, essa pasta será carregada na memória
 
-module.exports = app;
+server.listen(3000);
