@@ -15,6 +15,10 @@ class FileController {
 
     await box.save();
 
+    req.io.sockets // Pego todos usuários
+      .in(box._id) // conectados nessa box (box._id)
+      .emit('file', file); // e envia uma informação com os dados do arquivo salvo na mesma.
+
     return res.json(file);
   }
 }
