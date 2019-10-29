@@ -20,7 +20,8 @@ const File = new mongoose.Schema(
 
 // Atributo temporário (fora do BD) para armazenar temporariamente o dado. Criado para o frontend acessar o arquivo.
 File.virtual('url').get(function() { // Declarado como function para poder acessar o this como a classe.
-  return `http://localhost:3000/files/${encodeURIComponent(this.path)}`;
+  const url = process.env.URL || 'http://localhost:3000';
+  return `${url}/files/${encodeURIComponent(this.path)}`;
 });
 
 module.exports = mongoose.model('File', File);
